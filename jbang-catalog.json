@@ -1,0 +1,46 @@
+{
+  "catalogs": {},
+  "aliases": {
+    "hello": {
+      "script-ref": "hello.java",
+      "description": "Script that says hello back for each argument"
+    },
+    "properties": {
+      "script-ref": "properties.java",
+      "description": "Dump table of System properties"
+    },
+    "env": {
+      "script-ref": "env.java",
+      "description": "Dump table of Environment Variables"
+    },
+    "gavsearch": {
+      "script-ref": "gavsearch.java",
+      "description": "`gavsearch` lets you use search.maven.org from command line.\nExample: `gavsearch hibernate` will search for artifacts with hibernate in its name.\nYou can use any of the search modifiers search.maven.org supports, i.e.:\n`gavsearch c:QuarkusTest` will search for artifacts with class `QuarkusTest`"
+    },
+    "git": {
+      "script-ref": "jgit.java",
+      "description": "Git command line tool implemented with jgit. Lets you do basic git features without installing git!"
+    },
+    "bouncinglogo": {
+      "script-ref": "bouncinglogo.java"
+    },
+    "h2": {
+      "script-ref": "com.h2database:h2:1.4.200",
+      "arguments": [
+        "-webAllowOthers",
+        "-tcpAllowOthers"
+      ]
+    },
+    "catalog2readme": {
+      "script-ref": "catalog2readme.java"
+    }
+  },
+  "templates": {
+    "github": {
+      "file-refs": {
+        "{basename}.java": "templates/github.java.qute"
+      },
+      "description": "Simple cli to querying github"
+    }
+  }
+}
