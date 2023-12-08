@@ -2,8 +2,8 @@
   "catalogs": {},
   "aliases": {
     "hello": {
-      "script-ref": "hello.java",
-      "description": "Script that says hello back for each argument"
+      "script-ref": "html/html.java",
+      "description": "do html boilerplate staff"
     },
     "properties": {
       "script-ref": "properties.java",
