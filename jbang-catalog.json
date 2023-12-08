@@ -5,9 +5,9 @@
       "script-ref": "html/html.java",
       "description": "do html boilerplate staff"
     },
-    "properties": {
-      "script-ref": "properties.java",
-      "description": "Dump table of System properties"
+    "rollup": {
+      "script-ref": "rollup/rollup.java",
+      "description": "Setup a simple rollup project."
     },
     "env": {
       "script-ref": "env.java",
