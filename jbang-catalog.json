@@ -1,7 +1,7 @@
 {
   "catalogs": {},
   "aliases": {
-    "hello": {
+    "html": {
       "script-ref": "html/html.java",
       "description": "do html boilerplate staff"
     },
