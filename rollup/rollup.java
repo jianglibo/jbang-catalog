@@ -25,19 +25,6 @@ import picocli.CommandLine.Parameters;
 @Command(name = "rollup", mixinStandardHelpOptions = true, version = "rollup 0.1", description = "rollup boilerplate made with jbang")
 class rollup {
 
-    static final String blankHtml = """
-            <!doctype html>
-            <html lang=en>
-            <head>
-            <meta charset=utf-8>
-            <title>blah</title>
-            </head>
-            <body>
-            <p>I'm the content</p>
-            </body>
-            </html>
-            """;
-
     public static void main(String... args) {
         int exitCode = new CommandLine(new rollup()).execute(args);
         System.exit(exitCode);
@@ -64,7 +51,7 @@ class rollup {
         client.send(request, BodyHandlers.ofFile(zipFile));
         String script = """
                 cd {{projectRoot}}
-                unzip __rollup.zip
+                unzip -o __rollup.zip
                 if [[ $? -ne 0 ]]; then
                     echo "unzip failed"
                     exit 1
@@ -77,10 +64,12 @@ class rollup {
         // wrap the printed content with a squar.
 
         System.out.println("what to do next:");
+        System.out.println("------------------------------------------------------------------------");
         System.out.println("cd " + projectRoot.toAbsolutePath().toString());
         System.out.println("npm install");
         System.out.println("npm run dev");
         System.out.println("live-server public");
+        System.out.println("------------------------------------------------------------------------");
 
     }
 
