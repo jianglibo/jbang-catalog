@@ -37,7 +37,7 @@ class text {
             @Option(names = {
                     "--replace-with" }, paramLabel = "replacement", description = "the replacement string", required = true) String toReplace)
             throws IOException {
-        
+
         if (debug) {
             System.out.println("file: " + file);
             System.out.println("start: " + start);
@@ -47,10 +47,50 @@ class text {
             System.out.println("isRegex: " + isRegex);
             System.out.println("toReplace: " + toReplace);
         }
+        end = end == null ? start : end;
 
+        ReplaceResult afterChange = replace(file, start, end, keepTags, isRegex, toReplace);
+        if (!afterChange.changed) {
+            String trimQuoteStart = trimQuotes(start);
+            String trimQuoteEnd = trimQuotes(end);
+            if (trimQuoteStart != null && trimQuoteEnd != null) {
+                afterChange = replace(file, trimQuoteStart, trimQuoteEnd, keepTags, isRegex, toReplace);
+            }
+        }
+        if (!afterChange.changed) {
+            System.out.println("No change");
+            return;
+        }
+        if (dryRun) {
+            afterChange.lines.stream().forEach(System.out::println);
+        }
+    }
+
+    private String trimQuotes(String str) {
+        if (str.startsWith("'") && str.endsWith("'")) {
+            return str.substring(1, str.length() - 1);
+        } else if (str.startsWith("\"") && str.endsWith("\"")) {
+            return str.substring(1, str.length() - 1);
+        }
+        return null;
+    }
+
+    private static class ReplaceResult {
+        public List<String> lines;
+        public boolean changed;
+
+        public static ReplaceResult of(List<String> lines, boolean changed) {
+            ReplaceResult result = new ReplaceResult();
+            result.lines = lines;
+            result.changed = changed;
+            return result;
+        }
+    }
+
+    private ReplaceResult replace(Path file, String start, String end, boolean keepTags, boolean isRegex,
+            String toReplace) throws IOException {
         List<String> lines = Files.readAllLines(file);
         List<String> afterChange = new ArrayList<>();
-        end = end == null ? start : end;
         boolean startMet = false;
         boolean endMet = false;
 
@@ -84,8 +124,6 @@ class text {
                 afterChange.add(line); // before startMet
             }
         }
-        if (dryRun) {
-            afterChange.stream().forEach(System.out::println);
-        }
+        return ReplaceResult.of(afterChange, startMet && endMet);
     }
 }
