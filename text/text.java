@@ -15,9 +15,6 @@ import picocli.CommandLine.Parameters;
 @Command(name = "text", mixinStandardHelpOptions = true, version = "text 0.1", description = "text util made with jbang")
 class text {
 
-    @Parameters(index = "0", description = "The greeting to print", defaultValue = "World!")
-    private String greeting;
-
     public static void main(String... args) {
         int exitCode = new CommandLine(new text()).execute(args);
         System.exit(exitCode);
@@ -36,8 +33,20 @@ class text {
             @Option(names = {
                     "--regex" }, description = "use regex to match the start and end") boolean isRegex,
             @Option(names = {
+                    "--debug" }, description = "echo the parameters") boolean debug,
+            @Option(names = {
                     "--replace-with" }, paramLabel = "replacement", description = "the replacement string", required = true) String toReplace)
             throws IOException {
+        
+        if (debug) {
+            System.out.println("file: " + file);
+            System.out.println("start: " + start);
+            System.out.println("end: " + end);
+            System.out.println("dryRun: " + dryRun);
+            System.out.println("keepTags: " + keepTags);
+            System.out.println("isRegex: " + isRegex);
+            System.out.println("toReplace: " + toReplace);
+        }
 
         List<String> lines = Files.readAllLines(file);
         List<String> afterChange = new ArrayList<>();
