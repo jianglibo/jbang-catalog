@@ -9,9 +9,9 @@
       "script-ref": "rollup/rollup.java",
       "description": "Setup a simple rollup project."
     },
-    "env": {
-      "script-ref": "env.java",
-      "description": "Dump table of Environment Variables"
+    "text": {
+      "script-ref": "text/text.java",
+      "description": "text manipulation util"
     },
     "gavsearch": {
       "script-ref": "gavsearch.java",
