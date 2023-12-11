@@ -63,6 +63,8 @@ class text {
         }
         if (dryRun) {
             afterChange.lines.stream().forEach(System.out::println);
+        } else {
+            Files.write(file, afterChange.lines);
         }
     }
 
