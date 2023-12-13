@@ -24,10 +24,6 @@ class html {
             </body>
             </html>
             """;
-
-    @Parameters(index = "0", description = "The greeting to print", defaultValue = "World!")
-    private String greeting;
-
     public static void main(String... args) {
         int exitCode = new CommandLine(new html()).execute(args);
         System.exit(exitCode);
