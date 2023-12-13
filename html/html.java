@@ -24,6 +24,7 @@ class html {
             </body>
             </html>
             """;
+
     public static void main(String... args) {
         int exitCode = new CommandLine(new html()).execute(args);
         System.exit(exitCode);

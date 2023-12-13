@@ -19,7 +19,7 @@ class snapshot {
         CommandSpec spec;
 
         public static void main(String... args) {
-                int exitCode = new CommandLine(new command()).execute(args);
+                int exitCode = new CommandLine(new snapshot()).execute(args);
                 System.exit(exitCode);
         }
 

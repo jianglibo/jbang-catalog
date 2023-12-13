@@ -14,6 +14,7 @@ import java.nio.file.Path;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -47,13 +48,13 @@ class neovim {
         @Command(mixinStandardHelpOptions = true)
         void setup(@Parameters(description = "language servers to setup.", arity = "0..*", paramLabel = "<LanguageServers>") String[] languageServers)
                         throws IOException, InterruptedException {
-                if (languageServers.length == 0) {
+                if (languageServers == null || languageServers.length == 0) {
                         languageServers = new String[] { "lua_ls" };
                 }
                 String lspconfig = this.lspconfig.replace("<<lss>>",
                                 Stream.of(languageServers).map(this::quoteit).collect(Collectors.joining(",")));
                 String url = "https://raw.githubusercontent.com/jianglibo/jbang-catalog/main/neovim/neovim.config.zip";
-
+                
                 HttpClient client = HttpClient.newHttpClient();
                 HttpRequest request = HttpRequest.newBuilder()
                                 .uri(URI.create(url))
@@ -71,11 +72,13 @@ class neovim {
                                     echo "unzip failed"
                                     exit 1
                                 fi
-                                cp -rf nvim.config/* ${HOME}/.config/nvim
+                                echo "${lspconfig}" > nvim.config/.config/nvim/lua/config/mason-lspconfig.lua
+                                 cp -rf nvim.config/* ${HOME}/.config/nvim
                                 rm -rf __neovim.config.zip
                                 rm -rf nvim.config
                                 """;
-                MyLangUtil.runScript(script).stream().forEach(System.out::println);
+                MyLangUtil.runScript(script, Map.of("lspconfig", lspconfig)).stream().forEach(System.out::println);
+
         }
 
         private String quoteit(String origin) {
@@ -94,9 +97,13 @@ class neovim {
                                         .lines().toList();
                 }
 
-                public static List<String> runScript(String script) throws IOException {
-                        Process p = new ProcessBuilder("/bin/bash")
-                                        .redirectErrorStream(true).start();
+                public static List<String> runScript(String script, Map<String, String> extraEnvs) throws IOException {
+                        ProcessBuilder pb = new ProcessBuilder("/bin/bash")
+                                        .redirectErrorStream(true);
+                        Map<String, String> env = pb.environment();
+                        if (extraEnvs != null)
+                                env.putAll(extraEnvs);
+                        Process p = pb.start();
                         OutputStream os = p.getOutputStream();
                         os.write(script.getBytes(StandardCharsets.UTF_8));
                         os.flush();
