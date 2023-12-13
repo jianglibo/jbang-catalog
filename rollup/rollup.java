@@ -43,8 +43,6 @@ class rollup {
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(url))
                 .timeout(Duration.ofMinutes(1))
-                // .header("Content-Type", "application/json")
-                // .POST(BodyPublishers.ofFile(Paths.get("file.json")))
                 .GET()
                 .build();
         Path zipFile = projectRoot.resolve("__rollup.zip");
