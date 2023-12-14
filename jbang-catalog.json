@@ -21,8 +21,9 @@
       "script-ref": "command/command.java",
       "description": "manage the user defined commands."
     },
-    "bouncinglogo": {
-      "script-ref": "bouncinglogo.java"
+    "download": {
+      "script-ref": "download/download.java",
+      "description": "download assets from this project."
     },
     "h2": {
       "script-ref": "com.h2database:h2:1.4.200",
