@@ -25,6 +25,10 @@
       "script-ref": "download/download.java",
       "description": "download assets from this project."
     },
+    "neovim": {
+      "script-ref": "neovim/neovim.java",
+      "description": "a neovim ide."
+    },
     "h2": {
       "script-ref": "com.h2database:h2:1.4.200",
       "arguments": [
