@@ -73,7 +73,7 @@ class neovim {
                                     exit 1
                                 fi
                                 echo "${lspconfig}" > nvim.config/.config/nvim/lua/config/mason-lspconfig.lua
-                                 cp -rf nvim.config/* ${HOME}/.config/nvim
+                                cp -rf nvim.config/* ${HOME}/.config/nvim
                                 rm -rf __neovim.config.zip
                                 rm -rf nvim.config
                                 """;

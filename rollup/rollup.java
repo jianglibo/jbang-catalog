@@ -66,7 +66,7 @@ class rollup {
         System.out.println("cd " + projectRoot.toAbsolutePath().toString());
         System.out.println("npm install");
         System.out.println("npm run dev");
-        System.out.println("live-server public");
+        System.out.println("live-server public --port=$TOBF_SERVER_PORT --no-browser");
         System.out.println("------------------------------------------------------------------------");
 
     }

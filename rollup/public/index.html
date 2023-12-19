@@ -12,8 +12,13 @@
   </script>
   <script src="dist/bundle.js"></script>
 
+  <div id="app"></div>
+
   <script>
-    alert(MyBundle.foo());
+    const v =  typeof MyBundle;
+    const app = document.getElementById('app');
+    const t = typeof MyBundle.foo
+    app.innerText =`typeof MyBundle is ${v}, typeof Mybundle.foo is ${t}`;
   </script>
 </body>
 

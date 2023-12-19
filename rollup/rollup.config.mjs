@@ -7,10 +7,11 @@ import nodePolyfills from 'rollup-plugin-polyfill-node';
 // import sizes from 'rollup-plugin-sizes';
 // import html from '@rollup/plugin-html';
 import { nodeResolve } from '@rollup/plugin-node-resolve';
+import commonjs from '@rollup/plugin-commonjs';
 
 export default {
 	input: 'src/index.ts',
-	external: [/\.\/cfg$/],
+	external: [],
 	// (addonAttach, addonFit, addonWebLinks, xterm);
 	output:
 		[
