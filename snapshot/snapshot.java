@@ -59,7 +59,7 @@ class snapshot {
                         @Option(names = { "-s",
                                         "--shared" }, description = "Make the snaphost public accessible") boolean shared,
                         @Option(names = {
-                                        "--id" }, description = "If provided will overrride the snapshot specified by this id.", paramLabel = "NUMBER") Long id) {
+                                        "--id" }, description = "If provided will overrride the snapshot specified by this id. and the name will ignored.", paramLabel = "NUMBER") Long id) {
 
                 description = description == null ? "" : description;
                 String myString = new JSONObject()
