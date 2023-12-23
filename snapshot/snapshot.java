@@ -70,6 +70,22 @@ class snapshot {
                 System.out.println(myString);
         }
 
+        @Command(mixinStandardHelpOptions = true, name = "switch", description = "swith to another snapshot. UNSAVED CHANGES WILL BE LOST.")
+        void switchTo(@Parameters(description = "ID of the snapshot.", paramLabel = "<ID>") Long id,
+                        @Option(names = {
+                                        "--confirm" }, description = "add 'iknow' to confirm", paramLabel = "iknow", required = true) String confirm) {
+
+                if (!"iknow".equals(confirm))
+                        throw new ParameterException(spec.commandLine(),
+                                        String.format("--confirm iknow"));
+
+                String myString = new JSONObject()
+                                .put("id", id)
+                                .put("confirm", confirm)
+                                .toString();
+                System.out.println(myString);
+        }
+
         @Command(mixinStandardHelpOptions = true, description = "Create a new snapshot. A new asset will be created.")
         void create(@Parameters(description = "the name of the snapshot.", paramLabel = "name") String name,
                         @Option(names = { "-d",
