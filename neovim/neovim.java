@@ -46,7 +46,7 @@ class neovim {
         }
 
         @Command(mixinStandardHelpOptions = true)
-        void setup(@Parameters(description = "language servers to setup.", arity = "0..*", paramLabel = "<LanguageServers>") String[] languageServers)
+        void setup(@Parameters(description = "language servers to setup. see: https://github.com/williamboman/mason-lspconfig.nvim/blob/main/doc/server-mapping.md", arity = "0..*", paramLabel = "<LanguageServers>") String[] languageServers)
                         throws IOException, InterruptedException {
                 if (languageServers == null || languageServers.length == 0) {
                         languageServers = new String[] { "lua_ls" };
@@ -73,7 +73,8 @@ class neovim {
                                     exit 1
                                 fi
                                 echo "${lspconfig}" > nvim.config/.config/nvim/lua/config/mason-lspconfig.lua
-                                cp -rf nvim.config/* ${HOME}/.config/nvim
+                                cp -rf nvim.config/.config/nvim ${HOME}/.config/
+                                fi
                                 rm -rf __neovim.config.zip
                                 rm -rf nvim.config
                                 """;
