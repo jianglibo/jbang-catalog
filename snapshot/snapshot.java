@@ -12,7 +12,8 @@ import picocli.CommandLine.ParameterException;
 import picocli.CommandLine.Parameters;
 import picocli.CommandLine.Spec;
 
-@Command(name = "snapshot", mixinStandardHelpOptions = true, version = "snapshot 0.1", description = "snapshot made with jbang")
+@Command(name = "snapshot", subcommands = {
+                snapshot.Assets.class }, mixinStandardHelpOptions = true, version = "snapshot 0.1", description = "snapshot made with jbang")
 class snapshot {
 
         @Spec
@@ -131,6 +132,47 @@ class snapshot {
                                 .toString();
 
                 System.out.println(myString);
+        }
+
+        @Command(name = "assets", mixinStandardHelpOptions = true, description = "manage assets of the snapshot")
+        public static class Assets {
+
+                @Spec
+                CommandSpec spec;
+
+                @Command(mixinStandardHelpOptions = true, description = "List snapshots.")
+                void list(@Option(names = { "-n",
+                                "--num" }, description = "the numbers to show", paramLabel = "<number>", defaultValue = "10") Integer number) {
+                        String myString = new JSONObject()
+                                        .put("num", number)
+                                        .toString();
+                        System.out.println(myString);
+                }
+
+                @Command(mixinStandardHelpOptions = true, name = "switch", description = "swith to asset to the specified version")
+                void switchTo(@Parameters(description = "ID of the asset.", paramLabel = "<ID>") Long id) {
+                        String myString = new JSONObject()
+                                        .put("id", id)
+                                        .toString();
+                        System.out.println(myString);
+                }
+
+                @Command(mixinStandardHelpOptions = true, description = "Delete the asset with the given id.")
+                void delete(@Parameters(description = "ID of the asset.", paramLabel = "<ID>") Long id,
+                                @Option(names = {
+                                                "--confirm" }, description = "add 'iknow' to confirm", paramLabel = "iknow", required = true) String confirm) {
+
+                        if (!"iknow".equals(confirm))
+                                throw new ParameterException(spec.commandLine(),
+                                                String.format("--confirm iknow"));
+
+                        String myString = new JSONObject()
+                                        .put("id", id)
+                                        .put("confirm", confirm)
+                                        .toString();
+                        System.out.println(myString);
+                }
+
         }
 
 }
