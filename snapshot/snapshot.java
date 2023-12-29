@@ -2,6 +2,9 @@
 //DEPS info.picocli:picocli:4.6.3
 //DEPS org.json:json:20231013
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.json.JSONObject;
 
 import picocli.CommandLine;
@@ -158,7 +161,7 @@ class snapshot {
                 }
 
                 @Command(mixinStandardHelpOptions = true, description = "Delete the asset with the given id.")
-                void delete(@Parameters(description = "ID of the asset.", paramLabel = "<ID>") Long id,
+                void delete(@Parameters(description = "IDs of the asset.", paramLabel = "<...IDs>") List<Long> ids,
                                 @Option(names = {
                                                 "--confirm" }, description = "add 'iknow' to confirm", paramLabel = "iknow", required = true) String confirm) {
 
@@ -167,7 +170,7 @@ class snapshot {
                                                 String.format("--confirm iknow"));
 
                         String myString = new JSONObject()
-                                        .put("id", id)
+                                        .put("ids", ids.stream().map(String::valueOf).collect(Collectors.joining(",")))
                                         .put("confirm", confirm)
                                         .toString();
                         System.out.println(myString);
