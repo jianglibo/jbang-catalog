@@ -23,8 +23,11 @@ class command {
         }
 
         @Command(mixinStandardHelpOptions = true)
-        void list(@Option(names = { "-n",
-                        "--name" }, description = "filter by the name", paramLabel = "<partOfName>") String name,
+        void list(
+                        @Option(names = { "-n",
+                                        "--name" }, description = "filter by the name", paramLabel = "<partOfName>") String name,
+                        @Option(names = { "-m",
+                                        "--my" }, description = "list only my commands", paramLabel = "<My>") boolean my,
                         @Option(names = { "-p",
                                         "--page" }, description = "page number", paramLabel = "PageNumber", defaultValue = "0") int page,
                         @Option(names = {
@@ -36,6 +39,7 @@ class command {
                                 .put("name", name)
                                 .put("page", page)
                                 .put("pp", pp)
+                                .put("my", my)
                                 .toString();
                 System.out.println(myString);
         }

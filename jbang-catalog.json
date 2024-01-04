@@ -29,6 +29,10 @@
       "script-ref": "neovim/neovim.java",
       "description": "a neovim ide."
     },
+    "crypt": {
+      "script-ref": "crypt/crypt.java",
+      "description": "a crypt utility"
+    },
     "h2": {
       "script-ref": "com.h2database:h2:1.4.200",
       "arguments": [
