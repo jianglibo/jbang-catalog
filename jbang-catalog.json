@@ -33,6 +33,10 @@
       "script-ref": "crypt/crypt.java",
       "description": "a crypt utility"
     },
+    "runenv": {
+      "script-ref": "runenv/runenv.java",
+      "description": "manage runenvs."
+    },
     "h2": {
       "script-ref": "com.h2database:h2:1.4.200",
       "arguments": [
