@@ -9,6 +9,10 @@
       "script-ref": "rollup/rollup.java",
       "description": "Setup a simple rollup project."
     },
+    "lxcinfo": {
+      "script-ref": "lxcinfo/lxcinfo.java",
+      "description": "lxc interface."
+    },
     "text": {
       "script-ref": "text/text.java",
       "description": "text manipulation util"
